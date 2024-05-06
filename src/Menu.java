@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Menu extends JFrame {
     private JButton exploreBtn;
@@ -9,19 +11,24 @@ public class Menu extends JFrame {
     private JButton testBtn;
     private JPanel mainPanel;
 
-    public Menu() {
+    Based based;
+
+    public Menu(Based based) {
         setTitle("看字");
         setSize(300, 200);
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
         setVisible(true);
+
+        this.based = based;
 
         exploreBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Flashcard flashcard = new Flashcard();
+                Flashcard flashcard = new Flashcard(based);
+                flashcard.AdjustData(based.GetRandomWord());
                 flashcard.setVisible(true);
-                // JOptionPane.showMessageDialog(Menu.this, "KUPA", "New word!", JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
@@ -37,8 +44,14 @@ public class Menu extends JFrame {
         statisticsBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(Menu.this,
-                        "Words seen: 2137\nWords known: 666\nWords partially-known: 665\nWords forgotten: 69\n\nEstimated HSK level: 3",
+                based.UpdateStats();
+
+                JOptionPane.showMessageDialog(Menu.this, String.format(
+                        "Words seen: %d\n" +
+                                "Words known: %d\n" +
+                                "Words forgotten: %d\n\n" +
+                                "Estimated HSK level: %d",
+                        based.wordsMet, based.wordsKnown, based.wordsForgotten, based.hskLevel),
                         "Statistics", JOptionPane.INFORMATION_MESSAGE);
             }
         });
