@@ -11,7 +11,7 @@ public class Based {
     int hskLevel;
 
     Based() {
-        System.out.println("Based class was created.");
+        System.out.println("BASE class was created!");
         wordsMet = wordsKnown = wordsForgotten = 0;
     }
 
@@ -39,27 +39,33 @@ public class Based {
         }
     }
 
-    public Word GetRandomWord() {
-        ArrayList<Word> wordList = new ArrayList<Word>();
+    public Word GetRandomWord(String stateIn) {
+        Word word = null;
 
         try {
             DriverManager.registerDriver(new org.sqlite.JDBC());
             Connection connection = DriverManager.getConnection("jdbc:sqlite:C:db/HSK.db");
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(
-                    String.format("SELECT * FROM \"HSK_WORDS\" WHERE \"LEVEL\" <= %d AND ", this.hskLevel) +
-                    String.format("id NOT IN (SELECT id_word FROM \"HSK_WORDS_STATES\" WHERE state = 2)"));
+            String query =
+                    String.format("SELECT * FROM HSK_WORDS WHERE LEVEL <= %d AND id ", this.hskLevel) +
+(stateIn == "" ?    String.format("NOT IN (SELECT id_word FROM HSK_WORDS_STATES)") :
+                    String.format("IN (SELECT id_word FROM HSK_WORDS_STATES WHERE state IN (%s)) ", stateIn)) +
+                    "ORDER BY RANDOM() LIMIT 1";
+            System.out.println("State IN: " + stateIn + "\nQUERY: " + query);
 
-            while (resultSet.next()) {
-                Word word = new Word();
-                word.SetId(resultSet.getInt("id"));
-                word.SetTraditional(resultSet.getString("traditional"));
-                word.SetSimplified(resultSet.getString("simplified"));
-                word.SetPinyin(resultSet.getString("pinyin"));
-                word.SetMeaning(resultSet.getString("meaning"));
-                word.SetLevel(resultSet.getInt("LEVEL"));
-                wordList.add(word);
-            }
+            ResultSet resultSet = statement.executeQuery(query);
+
+            if ( !resultSet.isBeforeFirst() )
+                return null;    // no data was found
+
+            word = new Word();
+            word.SetId(resultSet.getInt("id"));
+            word.SetTraditional(resultSet.getString("traditional"));
+            word.SetSimplified(resultSet.getString("simplified"));
+            word.SetPinyin(resultSet.getString("pinyin"));
+            word.SetMeaning(resultSet.getString("meaning"));
+            word.SetLevel(resultSet.getInt("LEVEL"));
+
             resultSet.close();
             statement.close();
             connection.close();
@@ -68,7 +74,7 @@ public class Based {
             e.printStackTrace();
         }
 
-        return wordList.get((int)(Math.random() * wordList.size()));
+        return word;
     }
 
     void SaveTheWord(Word word, int known) {
@@ -76,15 +82,34 @@ public class Based {
             DriverManager.registerDriver(new org.sqlite.JDBC());
             Connection connection = DriverManager.getConnection("jdbc:sqlite:C:db/HSK.db");
 
+            System.out.println(String.valueOf(known) + ", " + String.valueOf(word.GetId()));
+
             String sql =
                     String.format("INSERT INTO HSK_WORDS_STATES (id_word, state) SELECT %d, %d ", word.GetId(), known) +
-                    String.format("WHERE NOT EXISTS (SELECT 1 FROM HSK_WORDS_STATES WHERE id_word = %d); ", word.GetId()) +
-                    String.format("UPDATE HSK_WORDS_STATES SET state = %d WHERE id_word = %d;", known, word.GetId());
+                    String.format("WHERE NOT EXISTS (SELECT 1 FROM HSK_WORDS_STATES WHERE id_word = %d);", word.GetId());
 
-            int rowsAffected = connection.prepareStatement(sql).executeUpdate();
-            System.out.println(rowsAffected + " row(s) affected");
+            connection.prepareStatement(sql).executeUpdate();
+            sql = String.format("UPDATE HSK_WORDS_STATES SET state = %d WHERE id_word = %d", known, word.GetId());
+            connection.prepareStatement(sql).executeUpdate();
 
             connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void Reset() {
+        try {
+            DriverManager.registerDriver(new org.sqlite.JDBC());
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:C:db/HSK.db");
+            Statement statement = connection.createStatement();
+
+            statement.executeUpdate("DELETE FROM HSK_WORDS_STATES");
+            System.out.println("Previously saved records were deleted.");
+
+            statement.close();
+            connection.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

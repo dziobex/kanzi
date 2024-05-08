@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Flashcard extends JFrame {
+    String category;
     Word word;
     Based based;
 
@@ -20,23 +21,18 @@ public class Flashcard extends JFrame {
         try {
             // save it
             based.SaveTheWord(Flashcard.this.word, known);
-
+            Word newWord = based.GetRandomWord(category);
             // generate next flashcard
-            Flashcard flashcard = new Flashcard(based);
-            flashcard.AdjustData(based.GetRandomWord());
-            flashcard.setVisible(true);
-
-            // close it
-            Flashcard.this.dispose();
+            this.AdjustData(newWord);
         } catch (RuntimeException re) {
             System.out.println("Coś poszło nie tak :(");
         }
     }
 
-    Flashcard(Based based) {
+    Flashcard(Based based, String category) {
         this.based = based;
+        this.category = category;
 
-        setVisible(true);
         setResizable(false);
         setContentPane(mainPanel);
         pack();
@@ -62,14 +58,31 @@ public class Flashcard extends JFrame {
     }
 
     public void AdjustData(Word word) {
+        if ( word == null ) {
+            this.setVisible(false);
+            this.dispose();
+            String message = String.format("Hm! It looks like there aren't any cards, which you can %s!",
+                    this.category == "" ? "explore" : this.category == "2" ? "refresh" : "practice");
+            JOptionPane.showMessageDialog(null,
+                    message,
+                    "OOPS... NO CARDS!", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         this.word = word;
 
-        setTitle( String.valueOf(word.GetId()) );
+        if ( this.category == "" )
+            setTitle( "New word!" );
+        else if ( this.category == "2" )
+            setTitle( "Learned by xin!" );
+        else
+            setTitle("You have seen this... Remember?");
+
         traditionalText.setText(word.GetTraditional());
         simplifiedText.setText(word.GetSimplified());
         pinyinText.setText(word.GetPinyin());
         meaningText.setText("<html><center><i>" + word.GetMeaning() + "</i></center</html>");
         mainPanel.setPreferredSize(flashcardPanel.getPreferredSize());
         pack();
+        setVisible(true);
     }
 }

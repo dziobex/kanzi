@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Menu">
-  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
     </constraints>
     <properties>
       <font name="DengXian"/>
-      <maximumSize width="300" height="200"/>
-      <minimumSize width="300" height="200"/>
+      <maximumSize width="300" height="235"/>
+      <minimumSize width="300" height="235"/>
       <name value=""/>
     </properties>
     <border type="none"/>
@@ -22,18 +22,18 @@
           <text value="Explore"/>
         </properties>
       </component>
-      <component id="9315f" class="javax.swing.JButton" binding="reviewBtn">
+      <component id="9315f" class="javax.swing.JButton" binding="refreshBtn">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font name="Fira Code"/>
-          <text value="Review"/>
+          <text value="Refresh"/>
         </properties>
       </component>
       <component id="5030d" class="javax.swing.JButton" binding="statisticsBtn">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font name="Fira Code"/>
@@ -42,11 +42,29 @@
       </component>
       <component id="7fbdc" class="javax.swing.JButton" binding="testBtn">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font name="Fira Code"/>
           <text value="Quick Test 考试"/>
+        </properties>
+      </component>
+      <component id="daa4d" class="javax.swing.JButton" binding="practiceBtn">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Fira Code"/>
+          <text value="Practice"/>
+        </properties>
+      </component>
+      <component id="ae7a0" class="javax.swing.JButton" binding="resetBtn">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Fira Code"/>
+          <text value="RESET EVERYTHING"/>
         </properties>
       </component>
     </children>
