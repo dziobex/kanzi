@@ -10,7 +10,7 @@ public class Menu extends JFrame {
     private JPanel mainPanel;
 
     public Menu() {
-        ImageIcon favicon = new ImageIcon("assets/fav.png");
+        ImageIcon favicon = new ImageIcon("assets/ming.png");
 
         // main menu design
         setIconImage(favicon.getImage());

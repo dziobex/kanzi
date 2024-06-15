@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,7 +9,8 @@ public class Flashcard extends JFrame {
 
     private JPanel flashcardPanel, mainPanel;
     private JTextPane meaningText;
-    private JLabel traditionalText,  simplifiedText, pinyinText;
+    private JTextArea simplifiedText, traditionalText;
+    private JLabel pinyinText;
     private JButton forgottenBtn, gotBtn, almostBtn;
 
     void saveMe(int known) {
@@ -26,9 +28,16 @@ public class Flashcard extends JFrame {
     Flashcard(String category) {
         this.category = category;
 
+        String dynastyLogo = this.category == "" ? "song" : this.category == "2" ? "tang" : "han";
+        ImageIcon favicon = new ImageIcon("assets/" + dynastyLogo + ".png");
+
+        // flashcard design
+        setIconImage(favicon.getImage());
         setResizable(false);
         setContentPane(mainPanel);
         pack();
+
+        simplifiedText.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 
         gotBtn.addActionListener(new ActionListener() {
             @Override

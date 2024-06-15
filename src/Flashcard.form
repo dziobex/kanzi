@@ -52,23 +52,6 @@
               <text value="Got it :)"/>
             </properties>
           </component>
-          <component id="afc68" class="javax.swing.JLabel" binding="traditionalText">
-            <constraints>
-              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="144" height="80"/>
-              </grid>
-            </constraints>
-            <properties>
-              <alignmentY value="0.5"/>
-              <background color="-1"/>
-              <font name="Droid Sans Mono" size="72" style="0"/>
-              <foreground color="-16777216"/>
-              <horizontalAlignment value="2"/>
-              <horizontalTextPosition value="0"/>
-              <text value="包"/>
-              <verticalAlignment value="1"/>
-            </properties>
-          </component>
           <component id="c18fb" class="javax.swing.JLabel" binding="pinyinText">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
@@ -94,23 +77,6 @@
               <horizontalTextPosition value="0"/>
               <selected value="true"/>
               <text value="Almost"/>
-            </properties>
-          </component>
-          <component id="ca409" class="javax.swing.JLabel" binding="simplifiedText">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="5" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="144" height="80"/>
-              </grid>
-            </constraints>
-            <properties>
-              <alignmentY value="0.5"/>
-              <background color="-16777216"/>
-              <font name="Droid Sans Mono" size="72" style="1"/>
-              <foreground color="-16777216"/>
-              <horizontalAlignment value="4"/>
-              <horizontalTextPosition value="0"/>
-              <text value="包"/>
-              <verticalAlignment value="1"/>
             </properties>
           </component>
           <scrollpane id="6ebf5">
@@ -152,6 +118,30 @@
               <grid row="2" column="0" row-span="1" col-span="5" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
           </hspacer>
+          <component id="3a637" class="javax.swing.JTextArea" binding="simplifiedText">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="4" fill="2" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="50"/>
+              </grid>
+            </constraints>
+            <properties>
+              <editable value="false"/>
+              <font name="DengXian" size="72" style="1"/>
+            </properties>
+          </component>
+          <component id="9d552" class="javax.swing.JTextArea" binding="traditionalText">
+            <constraints>
+              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="50"/>
+              </grid>
+            </constraints>
+            <properties>
+              <editable value="false"/>
+              <font name="DengXian" size="72"/>
+              <foreground color="-4473925"/>
+              <text value=""/>
+            </properties>
+          </component>
         </children>
       </grid>
     </children>
