@@ -1,10 +1,6 @@
 public class Word {
-    private int id;
-    private String traditional;
-    private String simplified;
-    private String pinyin;
-    private String meaning;
-    private int level;
+    private int id, level;
+    private String traditional, simplified, pinyin, meaning;
 
     public void SetId( int id ) { this.id = id; }
     public void SetTraditional( String trad ) { this.traditional = trad; }

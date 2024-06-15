@@ -6,13 +6,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Handling base-related stuff
+
 public class Based {
+    static Based baseObject = null;
+
     int wordsMet, wordsKnown, wordsForgotten;
     int hskLevel;
 
-    Based() {
+    private Based() {
         System.out.println("BASE class was created!");
         wordsMet = wordsKnown = wordsForgotten = 0;
+        UpdateStats();
+    }
+
+    public static Based getInstance() {
+        if ( baseObject == null )
+            baseObject = new Based();
+        return baseObject;
     }
 
     public void UpdateStats() {
@@ -28,8 +38,6 @@ public class Based {
             wordsForgotten = statement.executeQuery("SELECT COUNT(*) as \"count\" FROM \"HSK_WORDS_STATES\" WHERE state = 0")
                     .getInt(1);
             hskLevel = Math.floorDiv(wordsMet, 150) + 1;
-
-            System.out.println(String.format("Words in total: %d\nKnown: %d\nForgotten: %d\n", wordsMet, wordsKnown, wordsForgotten));
 
             statement.close();
             connection.close();
@@ -105,7 +113,6 @@ public class Based {
             Statement statement = connection.createStatement();
 
             statement.executeUpdate("DELETE FROM HSK_WORDS_STATES");
-            System.out.println("Previously saved records were deleted.");
 
             statement.close();
             connection.close();

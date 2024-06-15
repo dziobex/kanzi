@@ -8,12 +8,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-
-        Based based = new Based();
-        based.UpdateStats();
-
-        Menu menuWindow = new Menu(based);
-
+        Menu menuWindow = new Menu();
         System.out.println("看字");
     }
 }

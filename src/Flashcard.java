@@ -5,23 +5,17 @@ import java.awt.event.ActionListener;
 public class Flashcard extends JFrame {
     String category;
     Word word;
-    Based based;
 
-    private JButton forgottenBtn;
-    private JPanel flashcardPanel;
-    private JPanel mainPanel;
+    private JPanel flashcardPanel, mainPanel;
     private JTextPane meaningText;
-    private JLabel traditionalText;
-    private JLabel simplifiedText;
-    private JLabel pinyinText;
-    private JButton gotBtn;
-    private JButton almostBtn;
+    private JLabel traditionalText,  simplifiedText, pinyinText;
+    private JButton forgottenBtn, gotBtn, almostBtn;
 
     void saveMe(int known) {
         try {
             // save it
-            based.SaveTheWord(Flashcard.this.word, known);
-            Word newWord = based.GetRandomWord(category);
+            Based.getInstance().SaveTheWord(Flashcard.this.word, known);
+            Word newWord = Based.getInstance().GetRandomWord(category);
             // generate next flashcard
             this.AdjustData(newWord);
         } catch (RuntimeException re) {
@@ -29,8 +23,7 @@ public class Flashcard extends JFrame {
         }
     }
 
-    Flashcard(Based based, String category) {
-        this.based = based;
+    Flashcard(String category) {
         this.category = category;
 
         setResizable(false);
@@ -43,12 +36,14 @@ public class Flashcard extends JFrame {
                 saveMe(2);
             }
         });
+
         almostBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 saveMe(1);
             }
         });
+
         forgottenBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

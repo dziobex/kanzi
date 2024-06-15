@@ -19,9 +19,11 @@
         </constraints>
         <properties>
           <autoscrolls value="false"/>
+          <background color="-1"/>
           <font name="DengXian" size="12"/>
+          <foreground color="-1"/>
         </properties>
-        <border type="none" title="新词" title-justification="3">
+        <border type="line" title="新词" title-justification="3">
           <font name="Droid Sans Mono" size="16"/>
         </border>
         <children>
@@ -33,7 +35,9 @@
             </constraints>
             <properties>
               <autoscrolls value="false"/>
+              <font name="DengXian"/>
               <label value="Forgot :("/>
+              <selected value="false"/>
               <text value="Forgot :("/>
             </properties>
           </component>
@@ -56,8 +60,9 @@
             </constraints>
             <properties>
               <alignmentY value="0.5"/>
+              <background color="-1"/>
               <font name="Droid Sans Mono" size="72" style="0"/>
-              <foreground color="-4473925"/>
+              <foreground color="-16777216"/>
               <horizontalAlignment value="2"/>
               <horizontalTextPosition value="0"/>
               <text value="包"/>
@@ -69,6 +74,7 @@
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-1181441"/>
               <font name="Droid Sans Mono" size="24" style="1"/>
               <horizontalAlignment value="0"/>
               <horizontalTextPosition value="0"/>
@@ -86,6 +92,7 @@
             </constraints>
             <properties>
               <horizontalTextPosition value="0"/>
+              <selected value="true"/>
               <text value="Almost"/>
             </properties>
           </component>
@@ -113,22 +120,28 @@
               </grid>
             </constraints>
             <properties>
+              <background color="-1"/>
+              <foreground color="-1181441"/>
               <horizontalScrollBarPolicy value="30"/>
               <opaque value="false"/>
               <verticalScrollBarPolicy value="20"/>
             </properties>
-            <border type="etched" title="英语">
+            <border type="line" title="英语">
               <font name="Droid Sans Mono" size="12"/>
             </border>
             <children>
               <component id="f6341" class="javax.swing.JTextPane" binding="meaningText">
                 <constraints/>
                 <properties>
+                  <background color="-1"/>
+                  <caretColor color="-16777216"/>
                   <contentType value="text/html"/>
+                  <disabledTextColor color="-1"/>
                   <editable value="false"/>
+                  <foreground color="-1"/>
                   <maximumSize width="300" height="2147483647"/>
                   <minimumSize width="-1" height="22"/>
-                  <opaque value="false"/>
+                  <opaque value="true"/>
                   <text value="&lt;html&gt;&#13;&#10;  &lt;head&gt;&#13;&#10;    &#13;&#10;  &lt;/head&gt;&#13;&#10;  &lt;body&gt;&#13;&#10;  &lt;/body&gt;&#13;&#10;&lt;/html&gt;&#13;&#10;"/>
                 </properties>
               </component>
