@@ -1,22 +1,22 @@
 public class Word {
-    private int id, level;
-    private String traditional, simplified, pinyin, meaning;
+    int id, level;
+    String traditional, simplified, pinyin, meaning;
 
-    public void SetId( int id ) { this.id = id; }
-    public void SetTraditional( String trad ) { this.traditional = trad; }
-    public void SetSimplified( String simp ) { this.simplified = simp; }
-    public void SetPinyin( String pin ) { this.pinyin = pin; }
-    public void SetMeaning( String mean ) { this.meaning = mean; }
-    public void SetLevel( int level ) { this.level = level; }
+    public void setId( int id ) { this.id = id; }
+    public void setTraditional( String trad ) { this.traditional = trad; }
+    public void setSimplified( String simp ) { this.simplified = simp; }
+    public void setPinyin( String pin ) { this.pinyin = pin; }
+    public void setMeaning( String mean ) { this.meaning = mean; }
+    public void setLevel( int level ) { this.level = level; }
 
-    public int GetId() { return this.id; }
-    public String GetTraditional() { return this.traditional; }
-    public String GetSimplified() { return this.simplified; }
-    public String GetPinyin() { return this.pinyin; }
-    public String GetMeaning() { return this.meaning; }
-    public int GetLevel() { return level; }
+    public int getId() { return this.id; }
+    public String getTraditional() { return this.traditional; }
+    public String getSimplified() { return this.simplified; }
+    public String getPinyin() { return this.pinyin; }
+    public String getMeaning() { return this.meaning; }
+    public int getLevel() { return level; }
 
-    public String GetData() {
+    public String getData() {
         return String.format("ID: %s\nTRADITIONAL: %s\nSIMPLIFIED: %s\nPINYIN: %s\nMEANING: %s",
                 this.id, this.traditional, this.simplified, this.pinyin, this.meaning);
     }

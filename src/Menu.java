@@ -1,20 +1,13 @@
 import javax.swing.*;
-import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Enumeration;
 
 public class Menu extends JFrame {
-    private JButton exploreBtn, refreshBtn, statisticsBtn, practiceBtn, resetBtn;
-    private JPanel mainPanel;
+    JButton exploreBtn, refreshBtn, statisticsBtn, practiceBtn, resetBtn;
+    JPanel mainPanel;
 
     public Menu() {
-        ImageIcon favicon = new ImageIcon("assets/ming.png");
-
-        // main menu design
-        setIconImage(favicon.getImage());
-        setTitle("看字");
         setSize(300, 235);
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,7 +21,7 @@ public class Menu extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 exploreBtn.setText("Explore");
                 Flashcard flashcard = new Flashcard("");
-                flashcard.AdjustData(Based.getInstance().GetRandomWord(""));
+                flashcard.adjustData(Based.getInstance().getRandomWord(""));
             }
         });
 
@@ -37,7 +30,7 @@ public class Menu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Flashcard flashcard = new Flashcard("0, 1");
-                flashcard.AdjustData(Based.getInstance().GetRandomWord("0, 1"));
+                flashcard.adjustData(Based.getInstance().getRandomWord("0, 1"));
             }
         });
 
@@ -46,14 +39,14 @@ public class Menu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Flashcard flashcard = new Flashcard("2");
-                flashcard.AdjustData(Based.getInstance().GetRandomWord("2"));
+                flashcard.adjustData(Based.getInstance().getRandomWord("2"));
             }
         });
 
         statisticsBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Based.getInstance().UpdateStats();
+                Based.getInstance().updateStats();
 
                 JOptionPane.showMessageDialog(Menu.this, String.format(
                             "Words seen: %d\n" +
@@ -74,13 +67,21 @@ public class Menu extends JFrame {
                         "The garbage guy (dziobex) said...",
                         JOptionPane.YES_NO_OPTION ) == JOptionPane.YES_OPTION) {
                     // yes option
-                    Based.getInstance().Reset();
+                    Based.getInstance().reset();
                 }
             }
         });
     }
 
     void pritify() {
+        // set the favicon
+        ImageIcon favicon = new ImageIcon(getClass().getClassLoader().getResource("ming.png"));
+        setIconImage(favicon.getImage());
+
+        // set the title
+        setTitle("看字");
+
+        // set some fonts
         Font myFont = new Font("DengXian", Font.PLAIN, 16);
         UIDefaults defaults = UIManager.getDefaults();
         defaults.put("Button.font", myFont);
@@ -91,7 +92,7 @@ public class Menu extends JFrame {
         defaults.put("Table.font", myFont);
         defaults.put("List.font", myFont);
 
-//      defaults.put("Button.border", BorderFactory.createLineBorder(Color.getHSBColor(0, 0, 70)));
+        // how buttons should look like
         defaults.put("Button.background", Color.getHSBColor(180, 180, 170));
         defaults.put("Button.focusPainted", false);
         defaults.put("Button.contentAreaFilled", false);

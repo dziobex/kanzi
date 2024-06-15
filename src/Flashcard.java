@@ -7,19 +7,19 @@ public class Flashcard extends JFrame {
     String category;
     Word word;
 
-    private JPanel flashcardPanel, mainPanel;
-    private JTextPane meaningText;
-    private JTextArea simplifiedText, traditionalText;
-    private JLabel pinyinText;
-    private JButton forgottenBtn, gotBtn, almostBtn;
+    JPanel flashcardPanel, mainPanel;
+    JTextPane meaningText;
+    JTextArea simplifiedText, traditionalText;
+    JLabel pinyinText;
+    JButton forgottenBtn, gotBtn, almostBtn;
 
     void saveMe(int known) {
         try {
             // save it
-            Based.getInstance().SaveTheWord(Flashcard.this.word, known);
-            Word newWord = Based.getInstance().GetRandomWord(category);
+            Based.getInstance().saveTheWord(Flashcard.this.word, known);
+            Word newWord = Based.getInstance().getRandomWord(category);
             // generate next flashcard
-            this.AdjustData(newWord);
+            this.adjustData(newWord);
         } catch (RuntimeException re) {
             System.out.println("Coś poszło nie tak :(");
         }
@@ -28,8 +28,8 @@ public class Flashcard extends JFrame {
     Flashcard(String category) {
         this.category = category;
 
-        String dynastyLogo = this.category == "" ? "song" : this.category == "2" ? "tang" : "han";
-        ImageIcon favicon = new ImageIcon("assets/" + dynastyLogo + ".png");
+        String dynastyLogo = (this.category == "" ? "song" : this.category == "2" ? "tang" : "han") + ".png";
+        ImageIcon favicon = new ImageIcon(getClass().getClassLoader().getResource(dynastyLogo));
 
         // flashcard design
         setIconImage(favicon.getImage());
@@ -61,7 +61,7 @@ public class Flashcard extends JFrame {
         });
     }
 
-    public void AdjustData(Word word) {
+    public void adjustData(Word word) {
         if ( word == null ) {
             this.setVisible(false);
             this.dispose();
@@ -81,10 +81,10 @@ public class Flashcard extends JFrame {
         else
             setTitle("You have seen this... Remember?");
 
-        traditionalText.setText(word.GetTraditional());
-        simplifiedText.setText(word.GetSimplified());
-        pinyinText.setText(word.GetPinyin());
-        meaningText.setText("<html><center><i>" + word.GetMeaning() + "</i></center</html>");
+        traditionalText.setText(word.getTraditional());
+        simplifiedText.setText(word.getSimplified());
+        pinyinText.setText(word.getPinyin());
+        meaningText.setText("<html><center><i>" + word.getMeaning() + "</i></center</html>");
         mainPanel.setPreferredSize(flashcardPanel.getPreferredSize());
         pack();
         setVisible(true);

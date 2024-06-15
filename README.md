@@ -18,3 +18,4 @@ Helps with refreshing words from "HSK" levels 1-9.
 * Can be used offline (the database is local)
 
 # How to run?
+Download `kanzi.zip` and extract it. Remember to run the `.jar` file with the `db` directory in the same directory!
